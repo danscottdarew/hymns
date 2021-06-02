@@ -5,9 +5,13 @@ Color kPrimaryColor = Colors.lightBlueAccent;
 var kBG = LinearGradient(colors: [Colors.greenAccent, Colors.red], );
 const kSecondaryColor = Colors.purple;
 const kTop = 40;
-    const kLeft = 34;
-    const kBottom  = 22;
-    const kRight = 21;
+const kLeft = 34;
+const kBottom  = 22;
+const kRight = 21;
+
+SnackBar snackBar( String content){
+  return SnackBar(content: Text(content), );
+}
 
 class HymnNumber extends StatelessWidget {
   int number;

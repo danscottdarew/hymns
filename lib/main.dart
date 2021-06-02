@@ -1,5 +1,10 @@
+import 'package:catholic_classics_hymns/model/hymn_repo.dart';
+import 'package:catholic_classics_hymns/widgets/hymn_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:catholic_classics_hymns/widgets/home_screen.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'bloc/hymn_bloc.dart';
 
 void main() {
   runApp(MyApp());
@@ -10,32 +15,22 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+
+      routes: {
+        HomeScreen.id : (context)=> HomeScreen(),
+        HymnScreen.id : (context)=> HymnScreen()
+
+      },
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      home: BlocProvider(
+        builder: (context) => HymnBloc(HymnRepo()),
+        child: HomeScreen(),
+
+      ),
     );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
-
-
-  final String title;
-
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-
-  @override
-  Widget build(BuildContext context) {
-
-    return
-      HomeScreen();
   }
 }

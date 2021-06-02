@@ -32,6 +32,10 @@ class HymnBloc extends Bloc<HymnEvent, HymnState> {
       }
     }
 
+    if (event is HymnSelectedEvent) {
+      yield HymnSelected(event.hymn);
+    }
+
     if(event is ScrollUpEvent){
       yield HymnScrolledUp(event.hymnIndex);
     }

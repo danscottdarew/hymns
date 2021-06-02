@@ -21,6 +21,16 @@ class GetHymn extends HymnEvent{
 
 }
 
+class HymnSelectedEvent extends HymnEvent{
+  final Hymn hymn;
+
+  const HymnSelectedEvent(this.hymn);
+  @override
+  // TODO: implement props
+  List<Object> get props => [hymn];
+
+}
+
 class ScrollUpEvent extends HymnEvent{
   final int hymnIndex;
   const ScrollUpEvent(this.hymnIndex);

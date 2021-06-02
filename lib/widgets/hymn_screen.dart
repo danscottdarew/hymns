@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HymnScreen extends StatefulWidget {
+  static const id = 'hymn_screen';
   Hymn hymn;
 
   HymnScreen({Hymn hymn});

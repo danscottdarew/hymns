@@ -28,6 +28,14 @@ class HymnFound extends HymnState{
   List<Object> get props => [hymns];
 }
 
+class HymnSelected extends HymnState{
+  final hymn;
+  const HymnSelected(this.hymn);
+  @override
+  // TODO: implement props
+  List<Object> get props => [hymn];
+}
+
 class HymnNotFound extends HymnState{
   final message;
   const HymnNotFound(this.message);

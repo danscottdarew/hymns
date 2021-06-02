@@ -1,14 +1,27 @@
+import 'dart:html';
+
+import 'package:catholic_classics_hymns/bloc/hymn_bloc.dart';
+import 'package:catholic_classics_hymns/model/hymn.dart';
 import 'package:catholic_classics_hymns/widgets/wire.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:bloc/bloc.dart';
 
 class HomeScreen extends StatefulWidget {
+  static const id = 'home_screen';
+
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateMixin{
+  HymnBloc bloc;
   AnimationController ac;
   double maxSlide = 225;
+
+  TextEditingController tec = TextEditingController();
+  String searchInput;
+  TextField searchField;
 
   Container navDrawer = Container(color: kSecondaryColor,);
   Container hymnsPanel = Container(
@@ -29,8 +42,17 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
   void toggle() => ac.isDismissed? ac.forward() : ac.reverse();
 
   @override
+  void didChangeDependencies() {
+    // TODO: implement didChangeDependencies
+    super.didChangeDependencies();
+    bloc = BlocProvider.of(context);
+  }
+  
+  @override
   void initState() {
     // TODO: implement initState
+
+    searchField = TextField(autofocus: true, controller: tec, focusNode: focusNode,);
 
     ac = AnimationController(duration: Duration(seconds: 1), vsync: this, );
     super.initState();
@@ -40,7 +62,46 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
   Widget build(BuildContext context) {
 
 
-    return buildInitial();
+    return BlocListener<HymnBloc, HymnState>(
+  listener: (context, state) {
+    if(state is HymnNotFound){
+      Scaffold.of(context).showSnackBar(snackBar(state.message));
+    }
+
+    if(state is HymnSelected){
+      //Navigator.pu
+    }
+  },
+  child: BlocBuilder<HymnBloc, HymnState>(
+  
+  // ignore: missing_return
+  builder: (context, state) {
+    if(state is HymnInitial){
+      return buildInitial();
+    }
+    else if(state is HymnSearching){
+      return buildSearch();
+    }
+    else if (state is HymnFound){
+      return buildFoundHymns(state.hymns);
+    }
+    else if(state is HymnScrolledUp){
+      return buildScroll(state.hymnIndex);
+    }
+    else if(state is HymnScrolledDown){
+      return buildScroll(state.hymnIndex);
+    }
+
+
+
+  },
+),
+);
+      
+      
+      
+      
+      //buildInitial();
   }
 
   Widget buildInitial(){
@@ -56,7 +117,12 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
               //color: Color(0x00AEF9),
             ),
           ),
-          actions: [Padding(child: Icon(Icons.search, size: 38,), padding: EdgeInsets.all(9),)],
+          actions: [GestureDetector(
+              onTap: (){
+                openKeyboard();
+                bloc.add(SearchClickedEvent());
+              },
+              child: Padding(child: Icon(Icons.search, size: 38,), padding: EdgeInsets.all(9),))],
         ),
         body: GestureDetector(
           // onTap: toggle,
@@ -84,6 +150,89 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
       ),
     );
   }
+
+  Widget buildSearch() {
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: kPrimaryColor,
+          elevation: 0,centerTitle: true,
+          title: searchField,
+          leading: GestureDetector(
+            onTap: toggle,
+            child: Icon(Icons.menu,
+              //color: Color(0x00AEF9),
+            ),
+          ),
+          actions: [GestureDetector(
+              onTap: (){
+                searchInput = tec.text;
+                bloc.add(GetHymn(searchInput));
+              },
+              child: Padding(child: Icon(Icons.search, size: 38,), padding: EdgeInsets.all(9),))],
+        ),
+        body: GestureDetector(
+          // onTap: toggle,
+          child: AnimatedBuilder(
+            animation: ac,
+            builder: (context, _) {
+              double slide = ac.value * maxSlide;
+              double scale = 1 - (ac.value * 0.3);
+
+              return Stack(
+                children: [
+                  navDrawer,
+                  Transform(
+                    transform: Matrix4.identity()..translate(slide)..scale(scale)
+                    ,
+                    child: hymnsPanel,
+                    alignment: Alignment.centerLeft,
+
+                  )
+                ],
+              );
+            },
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget buildFoundHymns(List<Hymn> hymns) {
+    List<Widget> items = List<Widget>(hymns.length);
+    for(var i in hymns){
+      Row row = Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(i.number.toString()),
+          Text(i.title)
+        ],);
+
+      Container hymnItem = Container(
+        child: row,
+      );
+
+      GestureDetector gd = GestureDetector(
+        onTap: (){
+          bloc.add(HymnSelectedEvent(i));
+
+        },
+      );
+      items.add(hymnItem);
+    }
+    return ListView(
+      children: []
+    );
+  }
+
+  Widget buildScroll(int hymnIndex) {
+    return null;
+  }
+
+  void openKeyboard() {
+    FocusScope.of(context).requestFocus(focusNode);
+  }
+  FocusNode focusNode = FocusNode();
 }
 
 class HymnsSection extends StatefulWidget {
