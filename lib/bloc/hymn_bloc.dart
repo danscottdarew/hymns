@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:catholic_classics_hymns/model/hymn.dart';
 import 'package:catholic_classics_hymns/model/hymn_repo.dart';
+import 'package:catholic_classics_hymns/widgets/wire.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 
@@ -22,14 +23,15 @@ class HymnBloc extends Bloc<HymnEvent, HymnState> {
       yield HymnSearching();
 
     if(event is GetHymn){
-      try{
-          final hymns = await repo.fetchHymn(event.input);
+      //try{
+          final hymns =  repo.fetchHymn(event.input);
+          p('Hymns fFound @bol: $hymns');
           if(hymns != null)
             yield HymnFound(hymns);
-      }
-      on Error{
-        yield HymnNotFound('Hymn Not Found');
-      }
+      //}
+   //   on Error{
+       // yield HymnNotFound('Hymn Not Found');
+     // }
     }
 
     if (event is HymnSelectedEvent) {

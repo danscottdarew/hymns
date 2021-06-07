@@ -13,7 +13,9 @@ class SearchClickedEvent extends HymnEvent{
 
 class GetHymn extends HymnEvent{
   final String input;
-  const GetHymn(this.input);
+   GetHymn(this.input){
+    p('Input $input');
+  }
 
   @override
   // TODO: implement props

@@ -13,7 +13,7 @@ class HymnScreen extends StatefulWidget {
 }
 
 class _HymnScreenState extends State<HymnScreen> {
-  var hymn;
+  Hymn hymn;
 
   @override
   void initState() {
@@ -29,11 +29,19 @@ class _HymnScreenState extends State<HymnScreen> {
         appBar: AppBar(
           elevation: 0,
           title: Text('Hymn ${hymn.number}'),
-          leading: Icon(Icons.menu,
-            color: Color(0x00AEF9), ),
-          actions: [Icon(Icons.share, )],
+          actions: [
+            IconButton(
+              icon: Icon(Icons.share),
+              onPressed: null,
+            )
+          ],
+
         ),
-        body: Container(),
+        body: Container(
+          child: Text(hymn.content,
+            textWidthBasis: TextWidthBasis.parent,
+          ),
+        ),
       ),
     );
   }

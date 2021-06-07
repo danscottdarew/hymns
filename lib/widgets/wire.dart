@@ -13,6 +13,28 @@ SnackBar snackBar( String content){
   return SnackBar(content: Text(content), );
 }
 
+AppBar ab({title}){
+  return AppBar(
+    elevation: 0,
+    title: title,
+    backgroundColor: kPrimaryColor,
+  );
+}
+
+void p(String s){
+  print(s);
+}
+
+Offset getMidPoint(BuildContext context){
+  var m = MediaQuery.of(context);
+  print('SCREEN SIZE: $m');
+  return m.size.center(Offset.zero);
+}
+
+Size screenSize(BuildContext context){
+  return MediaQuery.of(context).size;
+}
+
 class HymnNumber extends StatelessWidget {
   int number;
   bool isBig;
@@ -69,9 +91,6 @@ class HymnPreview extends StatelessWidget {
   }
 }
 
-
-
-
 class ArrowIcons extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -96,7 +115,6 @@ class Line extends StatelessWidget{
   }
 }
 
-
 class MusicNote extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
@@ -105,5 +123,3 @@ class MusicNote extends StatelessWidget{
       left: 42.0 ,top: 02);
   }
 }
-
-
