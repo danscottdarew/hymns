@@ -62,3 +62,45 @@ class HymnScrolledDown extends HymnState{
   List<Object> get props => [hymnIndex];
 
 }
+
+
+class MenuItemHymnsViewed extends HymnState{
+  const MenuItemHymnsViewed();
+  @override
+  // TODO: implement props
+  List<Object> get props => [];
+
+}
+
+
+class MenuItemClassicsViewed extends HymnState{
+  const MenuItemClassicsViewed();
+  @override
+  // TODO: implement props
+  List<Object> get props => [];
+
+}
+
+class MenuItemTableOfContentsViewed extends HymnState{
+  const MenuItemTableOfContentsViewed();
+  @override
+  // TODO: implement props
+  List<Object> get props => [];
+
+}
+
+class MenuItemSolfaNotationViewed extends HymnState{
+  const MenuItemSolfaNotationViewed();
+  @override
+  // TODO: implement props
+  List<Object> get props => [];
+
+}
+
+class MenuItemAcknowledgementViewed extends HymnState{
+  const MenuItemAcknowledgementViewed();
+  @override
+  // TODO: implement props
+  List<Object> get props => [];
+
+}

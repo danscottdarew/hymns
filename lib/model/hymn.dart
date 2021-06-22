@@ -1,19 +1,28 @@
-class Hymn{
-  int number, numberOfVerses;
-  String title, chorus, preview, content ;
-  var verses = {};
+import 'package:objectbox/objectbox.dart';
 
-  Hymn({this.number, this.numberOfVerses, this.title, this.chorus, this.verses, this.content}){
+@Entity()
+class Hymn {
+  int id, number, numberOfVerses;
+  String title, chorus, preview, content, type, language;
+  List<String> verses;
 
-  }
+  Store s;
 
-  factory Hymn.fromDB(){
+  Hymn(
+      {this.number,
+      this.id,
+      this.numberOfVerses,
+      this.title,
+      this.chorus,
+      this.verses,
+      this.content}) {}
+
+  factory Hymn.fromDB() {
     return null;
   }
 
   @override
-  String toString(){
+  String toString() {
     return 'Title: $title, content: $content';
   }
-
 }

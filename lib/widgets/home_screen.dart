@@ -17,7 +17,7 @@ class HomeScreen extends StatefulWidget {
   _HomeScreenState createState() => _HomeScreenState();
 }
 
-enum MenuItems{
+enum MenuItems {
   Hymns,
   Classics,
   SolfaNotation,
@@ -47,10 +47,9 @@ class _HomeScreenState extends State<HomeScreen>
       alignment: AlignmentDirectional.topStart,
       children: [
         Positioned(
-            left: 20,
-            top: 25,
-            child: Menu(),
-
+          left: 20,
+          top: 25,
+          child: Menu(),
         )
       ],
     ),
@@ -61,26 +60,26 @@ class _HomeScreenState extends State<HomeScreen>
 
   void toggle() => ac.isDismissed ? ac.forward() : ac.reverse();
 
-  Widget mainMenu(){
-    if(selectedMenuItem == MenuItems.Hymns){
+  Widget mainMenu() {
+    if (selectedMenuItem == MenuItems.Hymns) {
       return Stack(
         children: [ArrowIcons(), Line(), MusicNote(), HymnsSection()],
       );
     }
 
-    if(selectedMenuItem == MenuItems.Classics){
+    if (selectedMenuItem == MenuItems.Classics) {
       return ClassicScreen();
     }
 
-    if(selectedMenuItem == MenuItems.SolfaNotation){
+    if (selectedMenuItem == MenuItems.SolfaNotation) {
       return ClassicScreen();
     }
 
-    if(selectedMenuItem == MenuItems.TableOfContents){
+    if (selectedMenuItem == MenuItems.TableOfContents) {
       return ClassicScreen();
     }
 
-    if(selectedMenuItem == MenuItems.Acknowledgements){
+    if (selectedMenuItem == MenuItems.Acknowledgements) {
       return ClassicScreen();
     }
 
@@ -335,6 +334,10 @@ class _HomeScreenState extends State<HomeScreen>
   }
 }
 
+void changeMenu() {
+  //setState(() {});
+}
+
 class Menu extends StatelessWidget {
   const Menu({Key key}) : super(key: key);
 
@@ -353,7 +356,12 @@ class Menu extends StatelessWidget {
     return Container(
       child: ListView(
         children: [
-          menuItem(icon: Icon(Icons.menu), title: 'Classics', onTap: () {}),
+          menuItem(
+              icon: Icon(Icons.menu),
+              title: 'Classics',
+              onTap: () {
+                //selectedMenu
+              }),
           menuItem(icon: Icon(Icons.menu), title: 'Hymns', onTap: () {}),
           menuItem(
               icon: Icon(Icons.menu), title: 'Solfa Notation', onTap: () {}),

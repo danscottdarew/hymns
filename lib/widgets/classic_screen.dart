@@ -23,6 +23,6 @@ class _ClassicScreenState extends State<ClassicScreen>
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Container(child: Text('Classics'));
   }
 }

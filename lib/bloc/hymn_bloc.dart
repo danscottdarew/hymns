@@ -13,36 +13,34 @@ part 'hymn_state.dart';
 class HymnBloc extends Bloc<HymnEvent, HymnState> {
   HymnRepo repo;
 
-  HymnBloc(this.repo);
+  HymnBloc(this.repo) : super(null);
 
   @override
   Stream<HymnState> mapEventToState(
     HymnEvent event,
   ) async* {
-    if(event is SearchClickedEvent)
-      yield HymnSearching();
+    if (event is SearchClickedEvent) yield HymnSearching();
 
-    if(event is GetHymn){
+    if (event is GetHymn) {
       //try{
-          final hymns =  repo.fetchHymn(event.input);
-          p('Hymns fFound @bol: $hymns');
-          if(hymns != null)
-            yield HymnFound(hymns);
+      final hymns = repo.fetchHymn(event.input);
+      p('Hymns fFound @bol: $hymns');
+      if (hymns != null) yield HymnFound(hymns);
       //}
-   //   on Error{
-       // yield HymnNotFound('Hymn Not Found');
-     // }
+      //   on Error{
+      // yield HymnNotFound('Hymn Not Found');
+      // }
     }
 
     if (event is HymnSelectedEvent) {
       yield HymnSelected(event.hymn);
     }
 
-    if(event is ScrollUpEvent){
+    if (event is ScrollUpEvent) {
       yield HymnScrolledUp(event.hymnIndex);
     }
 
-    if(event is ScrollDownEvent){
+    if (event is ScrollDownEvent) {
       yield HymnScrolledDown(event.hymnIndex);
     }
   }

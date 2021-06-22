@@ -15,11 +15,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-
       routes: {
-        HomeScreen.id : (context)=> HomeScreen(),
-        HymnScreen.id : (context)=> HymnScreen()
-
+        HomeScreen.id: (context) => HomeScreen(),
+        HymnScreen.id: (context) => HymnScreen()
       },
       title: 'Flutter Demo',
       theme: ThemeData(
@@ -27,9 +25,8 @@ class MyApp extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       home: BlocProvider(
-        builder: (context) => HymnBloc(HymnRepo()),
+        create: (context) => HymnBloc(HymnRepo()),
         child: HomeScreen(),
-
       ),
     );
   }

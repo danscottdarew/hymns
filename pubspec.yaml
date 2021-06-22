@@ -28,21 +28,40 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.0
-  flutter_bloc: ^1.0.0
+  flutter_bloc: any #^1.0.0
   bloc: any #^7.0.0
+  #flutter_mobile_vision: 0.1.3
+  flutter_mobile_vision: any
+  #^0.1.4+1
+  #firebase_ml_vision: any
+  #flutter_camera_ml_vision: any
+
+  camera: any
   equatable: ^0.6.1
-  #animated_text_kit: ^4.2.1
-  #flutter_markdown: ^0.6.2
-  #google_fonts: ^2.1.0
-  #internet_connection_checker: ^0.0.1+1
-  #just_audio: ^0.7.4+1
-  #flutter_native_splash: any
+  animated_text_kit: any #^4.2.1
+  flutter_markdown: any # ^0.6.2
+  google_fonts: any #^2.1.0
+  firebase_core: any
+  #internet_connection_checker: any #^0.0.1+1
+  #just_audio: any #^0.7.4+1
+  flutter_native_splash: any
   #pinput: any
-  flutter_slidable: ^0.1.0
+  flutter_slidable: any #^0.1.0
+  #sqflite: any
+  objectbox: any #^0.15.0
+  objectbox_flutter_libs: any #^0.15.0
+  #path_provider: any #^2.0.1
+  faker: any #^2.0.0
+  font_awesome_flutter: any
+  marquee: any
+
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  build_runner: any
+  objectbox_generator: any
+
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
